@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="Editors">
+        <folder name="text">
+            <folder name="x-golang">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="de.epdv.plugin.netbeans.lang.go.resources.Bundle"/>
+                <file name="language.instance">
+                    <attr name="instanceCreate" methodvalue="de.epdv.plugin.netbeans.lang.go.lexer.GLTokenId.getLanguage"/>
+                    <attr name="instanceOf" stringvalue="org.netbeans.api.lexer.Language"/>
+                </file>
+                <folder name="FontsColors">
+                    <folder name="NetBeans">
+                        <folder name="Defaults">
+                            <file name="FontAndColors.xml" url="FontAndColors.xml">
+                                <attr name="SystemFileSystem.localizingBundle" stringvalue="de.epdv.plugin.netbeans.lang.go.resources.Bundle"/>
+                            </file>
+                        </folder>
+                    </folder>
+                </folder>
+                <file name="de-epdv-plugin-netbeans-lang-go-parser-GLParserFactory.instance"/>
+                <file name="de-epdv-plugin-netbeans-lang-go-parser-SyntaxErrorsHighlightingTaskFactory.instance"/>
+            </folder>
+        </folder>
+    </folder>
+    <folder name="OptionsDialog">
+        <folder name="PreviewExamples">
+            <folder name="text">
+                <!--                <file name="x-golang" url="de/epdv/plugin/netbeans/lang/go/resources/GLTemplate.go"/>-->
+                <file name="x-golang" url="GLTemplate.go"/>
+            </folder>
+        </folder>
+    </folder>
+</filesystem>

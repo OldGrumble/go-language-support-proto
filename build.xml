@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- You may freely edit this file. See harness/README in the NetBeans platform -->
+<!-- for some information on what you could do (e.g. targets to override). -->
+<!-- If you delete this file and reopen the project it will be recreated. -->
+<project name="de.epdv.plugin.netbeans.lang.go" default="netbeans" basedir=".">
+    <description>Builds, tests, and runs the project de.epdv.plugin.netbeans.lang.go.</description>
+    <import file="nbproject/build-impl.xml"/>
+
+    <target name="antlr4" description="Translate ANTLR v4 grammar files.">
+        <java classname="org.antlr.v4.Tool" fork="true" failonerror="true">
+            <arg value="-o"/>
+            <arg value="${basedir}/build/generated-sources/antlr/de/epdv/plugin/netbeans/lang/go/antlr"/>
+            <arg value="-package"/>
+            <arg value="de.epdv.plugin.netbeans.lang.go.antlr"/>
+            <arg line="${basedir}/src/de/epdv/plugin/netbeans/lang/go/resources/Golang.g4"/>
+            <classpath>
+                <pathelement location="${basedir}/release/modules/ext/antlr-4.6-complete.jar"/>
+            </classpath>
+        </java>
+    </target>
+
+    <!--    <target name="compile" depends="antlr4,init,up-to-date,common.compile,generated-compile" unless="is.jar.uptodate"/>-->
+    <target name="-compile-depend">
+        <mkdir dir="${build.classes.dir}"/>
+        <property name="build.generated.sources.dir" location="${basedir}/build/generated-sources/"/>
+        <pathconvert property="build.generated.subdirs">
+            <dirset dir="${build.generated.sources.dir}" erroronmissingdir="false">
+                <include name="*"/>
+            </dirset>
+        </pathconvert>
+        <depend srcdir="${src.dir}:${build.generated.subdirs}" destdir="${build.classes.dir}" cache="${build.dir}/depcache">
+            <classpath refid="cp"/>
+        </depend>
+    </target>
+
+    <target name="compile" depends="antlr4,init,up-to-date,-compile-depend" unless="is.jar.uptodate">
+        <property name="javac.fork" value="false"/>
+        <nb-javac srcdir="${src.dir}:${build.generated.subdirs}" destdir="${build.classes.dir}" debug="${build.compiler.debug}" debuglevel="${build.compiler.debuglevel}" encoding="UTF-8"
+                  deprecation="${build.compiler.deprecation}" optimize="${build.compiler.optimize}" source="${javac.source}" target="${javac.target}" includeantruntime="false"
+                  fork="${javac.fork}"
+        >
+            <classpath refid="cp"/>
+            <compilerarg line="${javac.compilerargs}"/>
+            <processorpath refid="processor.cp"/>
+        </nb-javac>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${src.dir}" excludes="${jar-excludes}"/>
+        </copy>
+        <copy todir="${build.classes.dir}">
+            <fileset dir="${build.generated.subdirs}" excludes="${jar-excludes}"/>
+        </copy>
+        <processjsannotation classes="${build.classes.dir}" asm="${asm.jar}">
+            <classpath refid="cp"/>
+        </processjsannotation>
+    </target>
+</project>
